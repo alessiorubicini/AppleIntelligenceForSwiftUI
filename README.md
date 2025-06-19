@@ -9,8 +9,19 @@ A Swift package providing SwiftUI components and modifiers designed to bring App
 - Animated Progress Indicators
 - Reusable View Modifiers for glowing borders and gradient title text
 
-## Available Components
-- 
+## Documentation
+
+### Available Components
+- [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder) – Animated placeholder for AI image generation states.
+- [AIProgressView](Sources/AppleIntelligenceForSwiftUI/Components/AIProgressView) – Animated row of bouncing dots for loading/progress indication.
+- [AISuggestionBubble](Sources/AppleIntelligenceForSwiftUI/Components/AISuggestionBubble) – Stylish bubble for displaying AI-generated suggestions (inline or popover).
+- [AITextField](Sources/AppleIntelligenceForSwiftUI/Components/AITextField) – Custom text field with glowing border, ideal for AI prompts.
+
+## Available Modifiers
+- [AIText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIText) – Gradient, bold, rounded text style for titles and highlights.
+- [AIGlowEffect](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIGlowEffect) – Animated, colorful glowing border for any view.
+
+### How To Use
 
 ## Installation
 Add the package to your Xcode project using Swift Package Manager:
