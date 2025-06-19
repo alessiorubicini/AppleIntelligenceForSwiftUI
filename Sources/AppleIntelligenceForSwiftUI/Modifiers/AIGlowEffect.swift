@@ -1,5 +1,5 @@
 //
-//  GlowEffect.swift
+//  AIGlowEffect.swift
 //  AppleIntelligenceForSwiftUI
 //
 //  Created by Alessio Rubicini on 17/06/25.

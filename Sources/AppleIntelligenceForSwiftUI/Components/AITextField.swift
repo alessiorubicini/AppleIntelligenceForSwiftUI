@@ -1,3 +1,10 @@
+//
+//  AITextField.swift
+//  AppleIntelligenceForSwiftUI
+//
+//  Created by Alessio Rubicini on 17/06/25.
+//
+
 import SwiftUI
 
 public struct AITextField: View {

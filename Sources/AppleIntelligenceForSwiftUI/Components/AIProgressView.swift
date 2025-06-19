@@ -1,6 +1,13 @@
+//
+//  AIProgressView.swift
+//  AppleIntelligenceForSwiftUI
+//
+//  Created by Alessio Rubicini on 17/06/25.
+//
+
 import SwiftUI
 
-struct AILoadingIndicator: View {
+struct AIProgressView: View {
     @State private var phase: CGFloat = 0
     @State private var timer: Timer? = nil
     let dotCount = 3
@@ -39,7 +46,7 @@ struct AILoadingIndicator: View {
 }
 
 #Preview {
-    AILoadingIndicator()
+    AIProgressView()
         .padding()
         .preferredColorScheme(.light)
 }
