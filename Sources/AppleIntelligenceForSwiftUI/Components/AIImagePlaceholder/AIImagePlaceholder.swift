@@ -22,19 +22,35 @@ public struct AIImagePlaceholder: View {
     }
     
     public var body: some View {
-        switch state {
-        case .idle(let prompt):
-            IdlePlaceholder(prompt: prompt)
-        case .generating(let prompt):
-            GeneratingPlaceholder(prompt: prompt)
-        case .generated(let image):
-            GeneratedPlaceholder(image: image)
+        ZStack {
+            switch state {
+            case .idle(let prompt):
+                IdlePlaceholder(prompt: prompt)
+                    .transition(.opacity.combined(with: .blurReplace))
+            case .generating(let prompt):
+                GeneratingPlaceholder(prompt: prompt)
+                    .transition(.opacity.combined(with: .blurReplace))
+            case .generated(let image):
+                GeneratedPlaceholder(image: image)
+                    .transition(.opacity.combined(with: .blurReplace))
+            }
+        }
+        .animation(.easeInOut(duration: 0.45), value: state.idForTransition)
+    }
+}
+
+// Helper for transition identity
+private extension AIImagePlaceholderState {
+    var idForTransition: String {
+        switch self {
+        case .idle: return "idle"
+        case .generating: return "generating"
+        case .generated: return "generated"
         }
     }
 }
 
 // MARK: - Idle Placeholder
-
 
 private struct IdlePlaceholder: View {
     let prompt: String
@@ -47,7 +63,7 @@ private struct IdlePlaceholder: View {
             Text(prompt)
                 //.aitext()
                 .font(.subheadline)
-                .foregroundColor(Color.primary.opacity(0.7))
+                .foregroundColor(Color.primary.opacity(0.6))
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.5)
                 .lineLimit(3)
@@ -84,15 +100,15 @@ private struct AnimatedBubble: View {
                             ]), center: .center, startRadius: 60, endRadius: 120)
                         )
                         .blur(radius: 16)
-                        .scaleEffect(1.15)
-                    // Main colorful bubble (no longer using radial gradient)
+                        //.scaleEffect(1.15)
+                    
                     Circle()
                         .fill(
                             LinearGradient(gradient: Gradient(colors: [
                                 Color(hue: (0.60 + hue).truncatingRemainder(dividingBy: 1), saturation: 0.35, brightness: 0.95), // blue
                                 Color(hue: (0.85 + hue).truncatingRemainder(dividingBy: 1), saturation: 0.35, brightness: 0.95), // pink
                                 Color(hue: (0.12 + hue).truncatingRemainder(dividingBy: 1), saturation: 0.35, brightness: 0.95)  // yellow/orange
-                            ]), startPoint: .topLeading, endPoint: .bottom)
+                            ]), startPoint: .top, endPoint: .bottom)
                         )
                         .opacity(0.85)
                         .blur(radius: 6)
@@ -115,13 +131,13 @@ private struct AnimatedBubble: View {
                         .shadow(color: Color.purple.opacity(0.18), radius: 18)
                         .scaleEffect(animate ? 1.04 : 0.98)
                         .animation(Animation.easeInOut(duration: 2.2).repeatForever(autoreverses: true), value: animate)
-                    // Subtle warm glow at the bottom
+                    
                     Circle()
                         .fill(
                             RadialGradient(gradient: Gradient(colors: [
                                 Color.orange.opacity(0.18),
                                 Color.clear
-                            ]), center: .bottom, startRadius: 10, endRadius: 60)
+                            ]), center: .center, startRadius: 10, endRadius: 60)
                         )
                         .blur(radius: 12)
                         .offset(y: geo.size.height * 0.18)
@@ -166,14 +182,7 @@ private struct GeneratingPlaceholder: View {
                         .offset(x: -30, y: -38)
                         .blur(radius: 0.5)
                 )
-                .overlay(
-                    // Bubble reflection (bottom right)
-                    Circle()
-                        .fill(Color.blue.opacity(0.13))
-                        .frame(width: 28, height: 14)
-                        .offset(x: 32, y: 38)
-                        .blur(radius: 1.2)
-                )
+                .glassEffect()
             // Text with improved fit and style
             Text(prompt)
                 .font(.headline)
@@ -192,11 +201,12 @@ private struct GeneratingPlaceholder: View {
 
 private struct GeneratedPlaceholder: View {
     let image: Image
+    var size: CGFloat = 120
     var body: some View {
         image
             .resizable()
             .scaledToFill()
-            .frame(width: 120, height: 120)
+            .frame(width: size, height: size)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -214,6 +224,7 @@ private struct GeneratedPlaceholder: View {
                         lineWidth: 4
                     )
                     .blur(radius: 2)
+                    .frame(width: size, height: size)
             )
             .shadow(color: Color.purple.opacity(0.18), radius: 12)
     }
@@ -222,11 +233,39 @@ private struct GeneratedPlaceholder: View {
 // MARK: - Preview
 
 #Preview {
-    VStack(spacing: 50) {
-        AIImagePlaceholder(state: .idle(prompt: "Describe an image or add a suggestion from the list."))
-        AIImagePlaceholder(state: .generating(prompt: "Generating your image..."))
-        AIImagePlaceholder(state: .generated(image: Image(systemName: "photo")))
+    struct PreviewContainer: View {
+        @State private var selected: StateType = .idle
+        enum StateType: String, CaseIterable, Identifiable {
+            case idle, generating, generated
+            var id: String { rawValue }
+        }
+        @State private var state: AIImagePlaceholderState = .idle(prompt: "Describe an image or add a suggestion from the list.")
+        var body: some View {
+            VStack(spacing: 30) {
+                Picker("State", selection: $selected) {
+                    ForEach(StateType.allCases) { type in
+                        Text(type.rawValue.capitalized).tag(type)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+                AIImagePlaceholder(state: state)
+                    .frame(height: 200)
+            }
+            .onChange(of: selected) { oldValue, newValue in
+                withAnimation(.easeInOut(duration: 0.45)) {
+                    switch newValue {
+                    case .idle:
+                        state = .idle(prompt: "Describe an image or add a suggestion from the list.")
+                    case .generating:
+                        state = .generating(prompt: "Generating your image")
+                    case .generated:
+                        state = .generated(image: Image(systemName: "photo"))
+                    }
+                }
+            }
+            .padding()
+        }
     }
-    .padding()
-    
+    return PreviewContainer()
 } 
