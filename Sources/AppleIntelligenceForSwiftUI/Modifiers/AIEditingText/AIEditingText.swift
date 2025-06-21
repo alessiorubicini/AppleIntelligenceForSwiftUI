@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+/// A `ViewModifier` that visually indicates when a view is in an "editing" state.
+/// 
+/// When `isEditing` is true, this modifier applies a translucent fade and an animated white linear gradient overlay,
+/// creating a shimmer effect that signals active editing. When editing ends, it triggers a spring-based vertical "bounce" animation,
+/// providing tactile feedback to the user.
+/// 
+/// - Properties:
+///   - isEditing: Binding to a Boolean that controls the editing state.
+///   - animationValue: Internal state used to animate the shimmer overlay.
+///   - bounceOffset: Internal state used to animate the bounce effect when editing finishes.
+/// 
+/// Use the `.aiEditingText(when:)` view extension to apply this modifier to any SwiftUI view.
 struct AIEditingText: ViewModifier {
     
     @Binding var isEditing: Bool

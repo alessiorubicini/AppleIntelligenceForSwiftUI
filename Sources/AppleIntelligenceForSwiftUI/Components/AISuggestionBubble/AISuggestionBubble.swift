@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+/// A stylized suggestion bubble for displaying AI-generated suggestions in your SwiftUI app.
+/// 
+/// `AISuggestionBubble` visually highlights a suggestion and supports two display modes: `.popover` (floating with shadow)
+/// and `.inline` (embedded in the UI). The bubble features animated appearance/disappearance, a scale-tap effect,
+/// and a soft glowing background.
+///
+/// - Parameters:
+///   - suggestion: The text to display inside the bubble.
+///   - displayMode: How the bubble should be displayed. Use `.popover` for a floating effect, or `.inline` for seamless embedding.
+///   - onTap: An optional closure executed when the bubble is tapped. Use this to handle user selection of the suggestion.
+///
+/// ### Example
+/// ```swift
+/// AISuggestionBubble(suggestion: "Sure, let's meet at 3pm!", displayMode: .popover) {
+///     print("Suggestion tapped!")
+/// }
+/// ```
 public struct AISuggestionBubble: View {
     public enum DisplayMode {
         case popover, inline

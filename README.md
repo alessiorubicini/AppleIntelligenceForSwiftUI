@@ -52,15 +52,17 @@
 - [AIEditingText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIEditingText): Applies a scanning and bouncing animation to Text to indicate AI-driven editing.
 
 ## Installation
+Required iOS, macOS, watchOS, tvOS or visionOS 26.0 or above.
+
 Add the package to your Xcode project using Swift Package Manager:
 ```swift
-.package(url: "https://github.com/alessiorubicini/AppleIntelligenceForSwiftUI.git", from: "1.0.0")
+.package(url: "https://github.com/alessiorubicini/AppleIntelligenceForSwiftUI.git", from: "0.1")
 ```
 
-## Support
-Compatible with iOS, macOS, watchOS, tvOS and visionOS 26.0 and beyond.
 
 ## License
+Copyright 2025 (©) Alessio Rubicini.
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 
