@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="300" height="300" src="/Resources/icon.png" alt="Package Logo">
+  <img width="300" height="300" src="/Resources/Icon.png" alt="Package Logo">
   <h1><b>Apple Intelligence for SwiftUI</b></h1>
   <p>
     A Swift package providing SwiftUI components and modifiers designed to bring Apple Intelligence-style UI effects and animations to your applications.
@@ -35,8 +35,7 @@
 > This package is still in development and may not work as intended.
 
 
-## Preview
-![Apple Intelligence for SwiftUI](.Resources/preview.png)
+![Package Preview](/Resources/Preview.png)
 
 ## Features
 
