@@ -35,17 +35,10 @@
 > This package is still in development and may not work as intended.
 
 
-## Features
-- Animated Placeholders for AI-generated images
-- Suggestion Bubbles with popover and inline display
-- Custom Text Fields with glowing effects
-- Animated Progress Indicators
-- Reusable View Modifiers for glowing borders and gradient title text
-
 ## Preview
 ![Apple Intelligence for SwiftUI](.Resources/preview.png)
 
-## Documentation
+## Features
 
 ### Available Components
 - [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder): Animated placeholder for AI image generation states.

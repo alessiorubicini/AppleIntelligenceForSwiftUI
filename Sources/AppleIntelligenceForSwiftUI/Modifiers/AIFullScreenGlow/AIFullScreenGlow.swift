@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AIFullScreenGlowEffect: ViewModifier {
+    @Binding var isActive: Bool
     @State private var rotation: Double = 0
     
     func body(content: Content) -> some View {
@@ -16,11 +17,17 @@ struct AIFullScreenGlowEffect: ViewModifier {
             ZStack {
                 content
                 AnimatedFullScreenGlowBorder(rotation: $rotation, size: geometry.size)
+                    .opacity(isActive ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: isActive)
                     .allowsHitTesting(false)
             }
             .onAppear {
-                withAnimation(Animation.easeInOut(duration: 4).repeatForever(autoreverses: false)) {
-                    rotation = 360
+                if isActive {
+                    withAnimation(Animation.easeInOut(duration: 4).repeatForever(autoreverses: false)) {
+                        rotation = 360
+                    }
+                } else {
+                    rotation = 0
                 }
             }
         }
@@ -56,21 +63,26 @@ private struct AnimatedFullScreenGlowBorder: View {
 }
 
 extension View {
-    func fullScreenGlowEffect() -> some View {
-        self.modifier(AIFullScreenGlowEffect())
+    func fullScreenGlowEffect(isActive: Binding<Bool>) -> some View {
+        self.modifier(AIFullScreenGlowEffect(isActive: isActive))
     }
 }
 
 #Preview {
     struct AIFullScreenGlowEffect_Previews: View {
+        @State var isActive = true
+        
         var body: some View {
-            ZStack {
+            VStack(spacing: 30) {
                 Text("Hello, Siri!")
                     .font(.largeTitle)
+                
+                Button("Toggle") {
+                    self.isActive.toggle()
+                }.buttonStyle(.glass)
             }
-            .fullScreenGlowEffect()
+            .fullScreenGlowEffect(isActive: $isActive)
         }
     }
     return AIFullScreenGlowEffect_Previews()
 }
-

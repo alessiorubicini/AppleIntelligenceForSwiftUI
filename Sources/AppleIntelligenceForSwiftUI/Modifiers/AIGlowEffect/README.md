@@ -1,7 +1,7 @@
 # AIGlowEffect
 
 ## Overview
-`AIGlowEffect` is a SwiftUI view modifier that adds an animated, colorful glowing border to any view. It is ideal for highlighting interactive or AI-driven UI elements.
+`AIGlowEffect` is a SwiftUI view modifier that adds an animated, colorful glowing border to any view. It's a generic effect ideal for highlighting AI-driven UI elements that do not fall into the other categories.
 
 ## Usage
 Apply the `.glowEffect()` modifier to any SwiftUI view to add the animated glow.

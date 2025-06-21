@@ -1,34 +1,32 @@
 # AIFullScreenGlow
 
 ## Overview
-`AIFullScreenGlow` is a SwiftUI view modifier that adds a vibrant, animated glowing border around the entire screen. It is ideal for highlighting content or creating visually engaging, AI-inspired interfaces.
+`AIFullScreenGlow` is a SwiftUI view modifier that adds a vibrant, animated glowing border around the entire screen. Since it's almost identical to Apple Intelligence Siri's screen border glow effect, this should be used carefully only to provide a visual feedback for on-going specific intelligent actions, possibly only those involving the interaction with an intelligent agent.
+
+## Preview
 
 ## Usage
-Apply the `.fullScreenGlowEffect()` modifier to any SwiftUI view to wrap it with the animated full-screen glow effect.
+Apply the `.fullScreenGlowEffect` modifier to any SwiftUI view to wrap it with the animated full-screen glow effect.
 
 ```swift
 import AppleIntelligenceForSwiftUI
 
+@State var isActive = true
+
 var body: some View {
-    ZStack {
+    VStack(spacing: 30) {
         Text("Hello, Siri!")
             .font(.largeTitle)
+
+        Button("Toggle") {
+            self.isActive.toggle()
+        }.buttonStyle(.glass)
     }
-    .fullScreenGlowEffect()
+    .fullScreenGlowEffect(isActive: $isActive)
 }
+
 ```
 
-## Example
-```swift
-VStack {
-    Image(systemName: "sparkles")
-        .font(.system(size: 60))
-    Text("AI Magic")
-        .font(.title)
-}
-.fullScreenGlowEffect()
-```
-
-## Customization
-- The glow's gradient colors, animation speed, and border width can be adjusted in the source if needed.
+## Notes
 - The effect automatically adapts to the screen size and safe areas.
+- Currently, Apple does not prohibit the use of such an animation in any way in its guidelines. Please note that this may change in the future. Always consult Apple's Human Interface Guidelines.
