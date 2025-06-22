@@ -42,7 +42,6 @@
 ### Available Components
 - [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder): Animated placeholder for AI image generation states.
 - [AIProgressView](Sources/AppleIntelligenceForSwiftUI/Components/AIProgressView): Animated row of bouncing dots for loading/progress indication.
-- [AISuggestionBubble](Sources/AppleIntelligenceForSwiftUI/Components/AISuggestionBubble): Stylish bubble for displaying AI-generated suggestions (inline or popover).
 - [AITextField](Sources/AppleIntelligenceForSwiftUI/Components/AITextField): Custom text field with glowing border, ideal for AI prompts.
 
 ### Available Modifiers
@@ -50,6 +49,7 @@
 - [AIGlowEffect](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIGlowEffect): Animated, colorful glowing border for any view.
 - [AIFullScreenGlow](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIFullScreenGlow): Full-screen animated, colorful glowing effect similar to the Siri one.
 - [AIEditingText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIEditingText): Applies a scanning and bouncing animation to Text to indicate AI-driven editing.
+- [AISuggestionBubble](Sources/AppleIntelligenceForSwiftUI/Components/AISuggestionBubble): Stylish bubble for displaying AI-generated suggestions above elements.
 
 ## Installation
 Required iOS, macOS, watchOS, tvOS or visionOS 26.0 or above.
