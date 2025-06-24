@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct AIFullScreenGlowEffect: ViewModifier {
+private struct AIFullScreenGlowEffect: ViewModifier {
     @Binding var isActive: Bool
     @State private var rotation: Double = 0
     
@@ -63,7 +63,7 @@ private struct AnimatedFullScreenGlowBorder: View {
 }
 
 extension View {
-    func fullScreenGlowEffect(isActive: Binding<Bool>) -> some View {
+    public func aiFullScreenGlowEffect(isActive: Binding<Bool>) -> some View {
         self.modifier(AIFullScreenGlowEffect(isActive: isActive))
     }
 }
@@ -81,7 +81,7 @@ extension View {
                     self.isActive.toggle()
                 }.buttonStyle(.glass)
             }
-            .fullScreenGlowEffect(isActive: $isActive)
+            .aiFullScreenGlowEffect(isActive: $isActive)
         }
     }
     return AIFullScreenGlowEffect_Previews()

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AIProgressView: View {
+public struct AIProgressView: View {
     @State private var phase: CGFloat = 0
     @State private var timer: Timer? = nil
     let animationDuration: Double = 1.2
     
-    var body: some View {
+    public var body: some View {
         ZStack {
             Capsule()
                 .fill(Color.accentColor.opacity(0.15))

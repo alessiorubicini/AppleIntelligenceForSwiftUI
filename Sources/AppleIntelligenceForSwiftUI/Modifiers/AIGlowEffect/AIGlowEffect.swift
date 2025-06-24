@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct AIGlowEffect: ViewModifier {
+private struct AIGlowEffect: ViewModifier {
     @State private var rotation: Double = 0
     
     func body(content: Content) -> some View {
@@ -48,7 +48,7 @@ private struct AnimatedGlowBorder: View {
 }
 
 extension View {
-    func glowEffect() -> some View {
+    public func glowEffect() -> some View {
         self.modifier(AIGlowEffect())
     }
 }

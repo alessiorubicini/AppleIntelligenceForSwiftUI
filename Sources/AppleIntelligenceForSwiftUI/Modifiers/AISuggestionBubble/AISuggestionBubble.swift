@@ -27,7 +27,7 @@ import SwiftUI
 ///        print("Suggestion tapped!")
 ///    }
 /// ```
-public struct AISuggestionBubble: ViewModifier {
+private struct AISuggestionBubble: ViewModifier {
     @Binding var isPresented: Bool
     let suggestion: String
     let onTap: (() -> Void)?
@@ -80,14 +80,14 @@ public struct AISuggestionBubble: ViewModifier {
     }
 }
 
-public extension View {
+extension View {
     /// Adds an AI-generated suggestion bubble overlay to this view.
     /// - Parameters:
     ///   - isPresented: A binding to a Boolean value that determines whether to show the suggestion bubble.
     ///   - suggestion: The suggestion text to display.
     ///   - onTap: An optional closure to run when the bubble is tapped.
     /// - Returns: A view with an AI suggestion bubble overlay.
-    func aiSuggestionBubble(isPresented: Binding<Bool>, suggestion: String, onTap: (() -> Void)? = nil) -> some View {
+    public func aiSuggestionBubble(isPresented: Binding<Bool>, suggestion: String, onTap: (() -> Void)? = nil) -> some View {
         modifier(AISuggestionBubble(isPresented: isPresented, suggestion: suggestion, onTap: onTap))
     }
 }

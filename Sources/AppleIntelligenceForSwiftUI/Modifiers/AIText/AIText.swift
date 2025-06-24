@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct AIText: ViewModifier {
+private struct AIText: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.system(size: 28, weight: .bold, design: .rounded))
@@ -27,7 +27,7 @@ struct AIText: ViewModifier {
 }
 
 extension View {
-    func aitext() -> some View {
+    public func aitext() -> some View {
         self.modifier(AIText())
     }
 }
