@@ -31,9 +31,6 @@
   </a>
 </div>
 
-> [!WARNING]  
-> This package is still in development and may not work as intended.
-
 
 ![Package Preview](/Resources/Preview.png)
 
@@ -48,7 +45,7 @@
 
 ### Components
 - [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder): Animated placeholder for AI image generation states.
-- [AIProgressView](Sources/AppleIntelligenceForSwiftUI/Components/AIProgressView): Animated row of bouncing dots for loading/progress indication.
+- [AITextPlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AITextPlaceholder): Animated text placeholder with shimmer for AI text generation states.
 - [AITextField](Sources/AppleIntelligenceForSwiftUI/Components/AITextField): Custom text field with glowing border, ideal for AI prompts.
 
 

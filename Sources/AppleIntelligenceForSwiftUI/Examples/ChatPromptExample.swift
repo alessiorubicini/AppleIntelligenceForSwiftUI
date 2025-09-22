@@ -31,7 +31,7 @@ struct ChatPromptExample: View {
             .disabled(isLoading || prompt.isEmpty)
             
             if isLoading {
-                AIProgressView()
+                ProgressView()
                     .padding(.top, 20)
             } else if let response = aiResponse {
                 Text(response)

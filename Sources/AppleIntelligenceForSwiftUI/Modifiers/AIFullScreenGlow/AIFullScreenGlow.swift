@@ -23,11 +23,22 @@ private struct AIFullScreenGlowEffect: ViewModifier {
             }
             .onAppear {
                 if isActive {
-                    withAnimation(Animation.easeInOut(duration: 4).repeatForever(autoreverses: false)) {
+                    withAnimation(Animation.linear(duration: 8).repeatForever(autoreverses: false)) {
                         rotation = 360
                     }
                 } else {
                     rotation = 0
+                }
+            }
+            .onChange(of: isActive) { oldValue, newValue in
+                if newValue {
+                    withAnimation(Animation.linear(duration: 8).repeatForever(autoreverses: false)) {
+                        rotation = 360
+                    }
+                } else {
+                    withAnimation(Animation.easeOut(duration: 0.8)) {
+                        rotation = 0
+                    }
                 }
             }
         }
@@ -40,25 +51,70 @@ private struct AnimatedFullScreenGlowBorder: View {
     var size: CGSize
     
     var body: some View {
-        let dynamicCornerRadius = min(size.width, size.height) * 0.20
-        RoundedRectangle(cornerRadius: dynamicCornerRadius)
-            .stroke(
-                AngularGradient(
-                    gradient: Gradient(colors: [
-                        .blue, .purple, .red, .orange, .yellow, .green, .cyan, .blue
-                    ]),
-                    center: .center,
-                    angle: .degrees(rotation)
-                ),
-                lineWidth: 18
-            )
-            .frame(width: size.width, height: size.height)
-            .blur(radius: 12)
-            .opacity(0.85)
-            .shadow(color: .purple.opacity(0.4), radius: 10)
-            .shadow(color: .blue.opacity(0.3), radius: 10)
-            .shadow(color: .white.opacity(0.1), radius: 10)
-            .ignoresSafeArea()
+        let dynamicCornerRadius = min(size.width, size.height) * 0.18
+        
+        ZStack {
+            // Primary glow layer - main colored border
+            RoundedRectangle(cornerRadius: dynamicCornerRadius)
+                .stroke(
+                    AngularGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.8, green: 0.2, blue: 0.9),   // Purple/magenta (top-left)
+                            Color(red: 0.4, green: 0.3, blue: 0.9),   // Blue-purple (left)
+                            Color(red: 0.9, green: 0.6, blue: 0.2),   // Yellow-orange (bottom)
+                            Color(red: 0.9, green: 0.3, blue: 0.4),   // Pink-red (right)
+                            Color(red: 0.8, green: 0.2, blue: 0.9)    // Back to purple
+                        ]),
+                        center: .center,
+                        angle: .degrees(rotation)
+                    ),
+                    lineWidth: 16
+                )
+                .frame(width: size.width, height: size.height)
+                .blur(radius: 6)
+                .opacity(0.6)
+            
+            // Secondary glow layer - softer outer glow
+            RoundedRectangle(cornerRadius: dynamicCornerRadius)
+                .stroke(
+                    AngularGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.8, green: 0.2, blue: 0.9),
+                            Color(red: 0.4, green: 0.3, blue: 0.9),
+                            Color(red: 0.9, green: 0.6, blue: 0.2),
+                            Color(red: 0.9, green: 0.3, blue: 0.4),
+                            Color(red: 0.8, green: 0.2, blue: 0.9)
+                        ]),
+                        center: .center,
+                        angle: .degrees(rotation)
+                    ),
+                    lineWidth: 16
+                )
+                .frame(width: size.width, height: size.height)
+                .blur(radius: 6)
+                .opacity(0.3)
+            
+            // Tertiary glow layer - widest diffusion
+            RoundedRectangle(cornerRadius: dynamicCornerRadius)
+                .stroke(
+                    AngularGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.8, green: 0.2, blue: 0.9),
+                            Color(red: 0.4, green: 0.3, blue: 0.9),
+                            Color(red: 0.9, green: 0.6, blue: 0.2),
+                            Color(red: 0.9, green: 0.3, blue: 0.4),
+                            Color(red: 0.8, green: 0.2, blue: 0.9)
+                        ]),
+                        center: .center,
+                        angle: .degrees(rotation)
+                    ),
+                    lineWidth: 40
+                )
+                .frame(width: size.width, height: size.height)
+                .blur(radius: 32)
+                .opacity(0.15)
+        }
+        .ignoresSafeArea()
     }
 }
 

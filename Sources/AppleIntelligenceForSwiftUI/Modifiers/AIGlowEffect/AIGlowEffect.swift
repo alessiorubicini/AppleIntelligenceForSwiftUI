@@ -37,7 +37,7 @@ private struct AnimatedGlowBorder: View {
                     center: .center,
                     angle: .degrees(rotation)
                 ),
-                lineWidth: 2
+                lineWidth: 1
             )
             .blur(radius: 5)
             .opacity(0.9)
