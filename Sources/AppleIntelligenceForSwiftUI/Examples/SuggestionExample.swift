@@ -11,23 +11,40 @@ struct SuggestionExample: View {
     @State private var isSuggestionPresented = false
     
     var body: some View {
-        VStack(spacing: 40) {
-            Text("AI Suggestion Bubble")
-                .aitext()
-                .padding(.top, 40)
-            
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam.")
-                .aiSuggestionBubble(isPresented: $isSuggestionPresented, suggestion: "Try asking for a summary!") {
-                    print("Suggestion tapped")
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color.orange.opacity(0.3),
+                    Color.red.opacity(0.3),
+                    Color.purple.opacity(0.3),
+                    Color.blue.opacity(0.3)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ).ignoresSafeArea()
+            VStack(spacing: 100) {
+                Text("AI Suggestion Bubble")
+                    .aitext()
+                    .padding(.top, 40)
+                
+                VStack(spacing: 30) {
+                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.")
+                        .aiSuggestionBubble(
+                            isPresented: $isSuggestionPresented,
+                            text: "How can I help you today?",
+                            systemIcon: "apple.intelligence"
+                        )
+                        .padding()
+                    
+                    Button("Toggle") {
+                        self.isSuggestionPresented.toggle()
+                    }
+                    .buttonStyle(.glass)
                 }
-            
-            Button("Toggle Suggestion") {
-                isSuggestionPresented.toggle()
+                
             }
-            
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 

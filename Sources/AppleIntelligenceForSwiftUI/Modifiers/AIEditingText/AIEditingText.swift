@@ -11,16 +11,16 @@ private struct AIEditingText: ViewModifier {
     
     @Binding var isEditing: Bool
     @State private var animationValue: CGFloat = 1.0
+    @State private var shouldRunReveal: Bool = false
+    @State private var revealTime: TimeInterval = 0
     @State private var shouldRunEndShimmer: Bool = false
-    @State private var endAnimationValue: CGFloat = -1.0
-    @State private var stretchScaleY: CGFloat = 1.0
-    @State private var jumpOffsetY: CGFloat = 0.0
+    
+    private let revealDuration: TimeInterval = 0.8
     
     func body(content: Content) -> some View {
         content
             .opacity(isEditing ? 0.5 : 1.0)
-            .scaleEffect(x: 1.0, y: stretchScaleY, anchor: .top)
-            .offset(y: jumpOffsetY)
+            .modifier(TextRevealApplier(apply: shouldRunReveal, elapsedTime: revealTime, totalDuration: revealDuration))
             .overlay(
                 GeometryReader { geometry in
                     let height = geometry.size.height
@@ -52,7 +52,16 @@ private struct AIEditingText: ViewModifier {
                         .onDisappear {
                             animationValue = 1.0
                         }
-                    } else if shouldRunEndShimmer {
+                    }
+                }
+            )
+            // One-shot reverse-direction shimmer after editing finishes
+            .overlay(
+                GeometryReader { geometry in
+                    let height = geometry.size.height
+                    if shouldRunEndShimmer {
+                        let progress = max(0, min(1, revealDuration == 0 ? 1 : revealTime / revealDuration))
+                        let syncedOffsetFactor = -1.0 + (2.0 * progress)
                         LinearGradient(
                             gradient: Gradient(colors: [
                                 Color.clear,
@@ -63,58 +72,53 @@ private struct AIEditingText: ViewModifier {
                             endPoint: .bottom
                         )
                         .frame(height: height)
-                        .offset(y: endAnimationValue * height)
+                        .offset(y: syncedOffsetFactor * height)
                         .mask(content)
-                        .animation(
-                            Animation.linear(duration: 0.9),
-                            value: endAnimationValue
-                        )
                     }
                 }
             )
             .onChange(of: isEditing) { oldValue, newValue in
                 if oldValue == true && newValue == false {
-                    // Stretch and jump when finishing editing (mirrors AITextPlaceholder timing)
-                    stretchScaleY = 1.0
-                    jumpOffsetY = 20.0
-                    withAnimation(.spring(response: 0.28, dampingFraction: 0.6, blendDuration: 0)) {
-                        stretchScaleY = 1.08
-                        jumpOffsetY = 0.0
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.5, blendDuration: 0)) {
-                            stretchScaleY = 1.0
-                        }
-                    }
-                    // Trigger one-time reverse shimmer when editing ends
+                    // Trigger one-shot reverse shimmer; movement is driven by revealTime
                     shouldRunEndShimmer = true
-                    endAnimationValue = -1.0
-                    DispatchQueue.main.async {
-                        endAnimationValue = 1.0
+                    shouldRunReveal = true
+                    revealTime = 0
+                    withAnimation(.linear(duration: revealDuration)) {
+                        revealTime = revealDuration
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + revealDuration) {
+                        shouldRunReveal = false
+                        revealTime = 0
                         shouldRunEndShimmer = false
-                        endAnimationValue = -1.0
-                    }
-                } else if oldValue == false && newValue == true {
-                    // Entering editing: upward motion and subtle stretch
-                    stretchScaleY = 0.96
-                    jumpOffsetY = 20.0
-                    withAnimation(.spring(response: 0.28, dampingFraction: 0.6, blendDuration: 0)) {
-                        stretchScaleY = 1.08
-                        jumpOffsetY = 0.0
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) {
-                        withAnimation(.spring(response: 0.35, dampingFraction: 0.5, blendDuration: 0)) {
-                            stretchScaleY = 1.0
-                        }
                     }
                 }
             }
     }
 }
 
-extension View {
+// Applies AITextRevealRenderer to Text only when `apply` is true; otherwise passes content through.
+private struct TextRevealApplier: ViewModifier {
+    var apply: Bool
+    var elapsedTime: TimeInterval
+    var totalDuration: TimeInterval
+    
+    func body(content: Content) -> some View {
+        if apply {
+            // Rely on the fact that this modifier is attached to Text
+            content.textRenderer(
+                AITextRevealRenderer(
+                    elapsedTime: elapsedTime,
+                    totalDuration: totalDuration,
+                    enableGlint: false
+                )
+            )
+        } else {
+            content
+        }
+    }
+}
+
+extension Text {
     /// Applies an animated editing effect to the view when the specified binding is true.
     ///
     /// This modifier visually indicates the editing state by animating a shimmering white gradient overlay
@@ -152,4 +156,4 @@ extension View {
         }
     }
     return PreviewContainer()
-} 
+}

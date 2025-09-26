@@ -32,7 +32,7 @@ struct EditingTextExample: View {
                 Button("Start Editing") {
                     isEditing = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        self.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam."
+                        self.text = "Pariatur laborum labore id anim elit do. Enim sint excepteur et fugiat incididunt sunt. Exercitation deserunt commodo commodo deserunt. Veniam aliquip officia incididunt sit consectetur officia dolore eiusmod proident tempor sit pariatur. Cupidatat magna ad Lorem. Nostrud consectetur dolore ullamco labore."
                         isEditing = false
                     }
                     

@@ -36,6 +36,7 @@
 
 ## Features
 
+
 ### Modifiers
 - [AIText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIText): Gradient, bold, rounded text style for titles and highlights.
 - [AIGlowEffect](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIGlowEffect): Animated, colorful glowing border for any view.
@@ -47,6 +48,9 @@
 - [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder): Animated placeholder for AI image generation states.
 - [AITextPlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AITextPlaceholder): Animated text placeholder with shimmer for AI text generation states.
 - [AITextField](Sources/AppleIntelligenceForSwiftUI/Components/AITextField): Custom text field with glowing border, ideal for AI prompts.
+
+
+> **Note:** While this package helps you create Apple Intelligence-style UI, developers should always refer to the [Generative AI section of the Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/generative-ai/) to ensure your app meets Apple's standards for generative AI experiences.
 
 
 ## Installation

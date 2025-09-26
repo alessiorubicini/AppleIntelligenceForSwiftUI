@@ -17,7 +17,7 @@ struct FullScreenGlowExample: View {
 
         }
         .padding()
-        .aiFullScreenGlowEffect(isActive: $isActive)
+        .aiScreenGlowEffect(isActive: $isActive)
 
     }
 }
