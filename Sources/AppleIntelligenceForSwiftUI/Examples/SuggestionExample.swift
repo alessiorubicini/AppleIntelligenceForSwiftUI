@@ -23,7 +23,7 @@ struct SuggestionExample: View {
                 endPoint: .bottomTrailing
             ).ignoresSafeArea()
             VStack(spacing: 100) {
-                Text("AI Suggestion Bubble")
+                Text("Suggestion Bubble")
                     .aitext()
                     .padding(.top, 40)
                 

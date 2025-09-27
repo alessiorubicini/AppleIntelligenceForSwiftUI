@@ -1,6 +1,13 @@
+//
+//  ScreenGlowExample.swift
+//  AppleIntelligenceForSwiftUI
+//
+//  Created by Alessio Rubicini on 22/09/25.
+//
+
 import SwiftUI
 
-struct FullScreenGlowExample: View {
+struct ScreenGlowExample: View {
     @State private var isActive = false
     
     var body: some View {
@@ -23,5 +30,5 @@ struct FullScreenGlowExample: View {
 }
 
 #Preview {
-    FullScreenGlowExample()
+    ScreenGlowExample()
 } 
