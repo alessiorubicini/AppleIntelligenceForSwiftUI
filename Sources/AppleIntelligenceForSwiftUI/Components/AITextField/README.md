@@ -6,23 +6,12 @@
 - An animated, multi‑color glow with a subtle glass effect
 - An optional trailing action button (arrow icon) that you can hook to your own action
 
-## Initializer
-```swift
-AITextField(
-    text: Binding<String>,
-    placeholder: String = "",
-    action: (() -> Void)? = nil
-)
-```
-
-- `text`: Binding to the field's text
-- `placeholder`: Shown when the field is empty
-- `action`: When provided, a trailing button appears and invokes this closure on tap
+## Preview
+![AITextField Preview](./TextField-Preview.png)
 
 ## Usage
 Import the module and use `AITextField` in your SwiftUI view.
 
-### Basic
 ```swift
 import AppleIntelligenceForSwiftUI
 
@@ -50,10 +39,6 @@ var body: some View {
         }
     )
     .padding()
-}
-
-func submit(_ text: String) {
-    // Handle the text (e.g., call your AI endpoint)
 }
 ```
 

@@ -14,7 +14,7 @@ struct TextPlaceholderExample: View {
             Text("Text Placeholder Example")
                 .aitext()
             
-            AITextPlaceholder(isGenerating: isGenerating, lineCount: 4) {
+            AIGeneratingText(isGenerating: isGenerating, lineCount: 4) {
                 Text("Anim velit labore ex pariatur nostrud ullamco incididunt eu nostrud duis est. Irure eu enim amet ea ea cillum laborum ut occaecat incididunt.")
                     .font(.body)
                     .foregroundStyle(.primary)

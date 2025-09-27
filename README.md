@@ -39,14 +39,14 @@
 
 ### Modifiers
 - [AIText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIText): Gradient, bold, rounded text style for titles and highlights.
-- [AIGlowEffect](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIGlowEffect): Animated, colorful glowing border for any view.
-- [AIFullScreenGlow](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIFullScreenGlow): Full-screen animated, colorful glowing effect similar to the Siri one.
+- [AIScreenGlow](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIScreenGlow): Full-screen animated, colorful glowing effect similar to the Siri one.
 - [AIEditingText](Sources/AppleIntelligenceForSwiftUI/Modifiers/AIEditingText): Applies a scanning and bouncing animation to Text to indicate AI-driven editing.
 - [AISuggestionBubble](Sources/AppleIntelligenceForSwiftUI/Components/AISuggestionBubble): Stylish bubble for displaying AI-generated suggestions above elements.
+- [TextGlow](Sources/AppleIntelligenceForSwiftUI/Modifiers/TextGlow): Adds a glowing effect to text, usually used to show loading states.
 
 ### Components
-- [AIImagePlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AIImagePlaceholder): Animated placeholder for AI image generation states.
-- [AITextPlaceholder](Sources/AppleIntelligenceForSwiftUI/Components/AITextPlaceholder): Animated text placeholder with shimmer for AI text generation states.
+- [AIImageGeneration](Sources/AppleIntelligenceForSwiftUI/Components/AIImageGeneration): Animated placeholder for AI image generation states.
+- [AIGeneratingText](Sources/AppleIntelligenceForSwiftUI/Components/AIGeneratingText): Animated text placeholder with shimmer for AI text generation states.
 - [AITextField](Sources/AppleIntelligenceForSwiftUI/Components/AITextField): Custom text field with glowing border, ideal for AI prompts.
 
 

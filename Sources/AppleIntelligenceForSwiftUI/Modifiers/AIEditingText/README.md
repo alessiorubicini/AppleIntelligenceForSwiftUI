@@ -1,10 +1,10 @@
 # AIEditingText
 
 ## Overview
-`AIEditingText` is a SwiftUI view modifier that visually indicates when a text is being edited by intelligent models or agents. It applies an effect similar to the one used in Apple Intelligence writing tools, with a subtle opacity change, a moving highlight animation, and a bounce effect when editing ends.
+`AIEditingText` is a SwiftUI view modifier that visually indicates when a text is being edited by intelligent models or agents. It applies an effect similar to the one used in Apple Intelligence writing tools, with a subtle opacity change, a moving highlight animation, and a wave effect when editing ends.
 
 ## Preview
-
+![AiEditingText Preview](./EditingText-Preview.gif)
 
 
 ## Usage

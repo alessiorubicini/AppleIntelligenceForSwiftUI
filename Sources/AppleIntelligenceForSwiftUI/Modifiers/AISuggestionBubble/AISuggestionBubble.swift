@@ -24,6 +24,8 @@ private struct AISuggestionBubble: ViewModifier {
     @State private var tapScale: CGFloat = 1.0
     @State private var bubbleOffset: CGFloat = 0
     @State private var contentHeight: CGFloat = 0
+    @State private var bubbleScale: CGFloat = 0.8
+    @State private var bubbleOpacity: Double = 0
     
     public init(isPresented: Binding<Bool>, text: String, systemIcon: String? = nil, onTap: (() -> Void)? = nil) {
         self._isPresented = isPresented
@@ -46,13 +48,34 @@ private struct AISuggestionBubble: ViewModifier {
                     contentHeight = height
                     bubbleOffset = -height - 12 // 12 è un padding extra opzionale
                 }
+                .onChange(of: isPresented) { newValue in
+                    if newValue {
+                        // Animate in: start from content position and scale up
+                        bubbleOffset = 0
+                        bubbleScale = 0.8
+                        bubbleOpacity = 0
+                        
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                            bubbleOffset = -contentHeight - 12
+                            bubbleScale = 1.0
+                            bubbleOpacity = 1.0
+                        }
+                    } else {
+                        // Animate out: slide down to content position, scale down and fade out
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                            bubbleOffset = 0
+                            bubbleScale = 0.8
+                            bubbleOpacity = 0
+                        }
+                    }
+                }
             
             if isPresented {
                 bubbleContent
                     .offset(y: bubbleOffset)
+                    .scaleEffect(bubbleScale)
+                    .opacity(bubbleOpacity)
                     .zIndex(1)
-                    .transition(.scale.combined(with: .opacity))
-                    .animation(.spring(response: 0.4, dampingFraction: 0.7), value: isPresented)
             }
         }
     }
