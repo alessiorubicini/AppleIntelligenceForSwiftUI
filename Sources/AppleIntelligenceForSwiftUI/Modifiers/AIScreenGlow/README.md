@@ -4,7 +4,7 @@
 `AIScreenGlow` is a SwiftUI view modifier that adds a vibrant, animated glowing border around the entire screen. Since it's almost identical to Apple Intelligence Siri's screen border glow effect, this should be used carefully only to provide a visual feedback for on-going specific intelligent actions, possibly only those involving the interaction with an intelligent agent.
 
 ## Preview
-![AiScreenGlow Preview](./ScreenGlow-Preview.gif)
+<img src="./ScreenGlow-Preview.gif" width="300" alt="AiScreenGlow Preview">
 
 ## Usage
 Apply the `.fullScreenGlowEffect` modifier to any SwiftUI view to wrap it with the animated full-screen glow effect.

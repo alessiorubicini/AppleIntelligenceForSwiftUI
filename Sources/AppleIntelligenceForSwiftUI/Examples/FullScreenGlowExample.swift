@@ -5,7 +5,7 @@ struct FullScreenGlowExample: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Text("Full Screen Glow")
+            Text("Screen Glow (like Siri!)")
                 .aitext()
 
             

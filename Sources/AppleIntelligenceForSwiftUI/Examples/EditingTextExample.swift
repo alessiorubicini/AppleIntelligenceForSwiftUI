@@ -13,7 +13,7 @@ struct EditingTextExample: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Text("AI Editing Text")
+            Text("Editing Text")
                 .aitext()
                 .padding(.top, 40)
             

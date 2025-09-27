@@ -4,7 +4,7 @@
 `AITextPlaceholder` is a SwiftUI component to display skeleton placeholder lines while AI-generated text is being produced. While generating, it shows stacked rounded rectangles with a vertical rainbow shimmer. When generation completes, your content replaces the placeholder and receives a one-time vertical shimmer in the opposite direction.
 
 ## Preview
-![AiGeneratingText Preview](./GeneratingText-Preview.gif)
+<img src="./GeneratingText-Preview.gif" width="300" alt="AiGeneratingText Preview">
 
 ## Basic Usage
 ```swift

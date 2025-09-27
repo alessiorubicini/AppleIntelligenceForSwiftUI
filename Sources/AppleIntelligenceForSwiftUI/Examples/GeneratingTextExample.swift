@@ -1,5 +1,5 @@
 //
-//  AIFullScreenGlowEffect.swift
+//  GeneratingTextExample.swift
 //  AppleIntelligenceForSwiftUI
 //
 //  Created by Alessio Rubicini on 22/09/25.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct TextPlaceholderExample: View {
+struct GeneratingTextExample: View {
     @State private var isGenerating = true
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
-            Text("Text Placeholder Example")
+            Text("Generating Text")
                 .aitext()
             
-            AIGeneratingText(isGenerating: isGenerating, lineCount: 4) {
-                Text("Anim velit labore ex pariatur nostrud ullamco incididunt eu nostrud duis est. Irure eu enim amet ea ea cillum laborum ut occaecat incididunt.")
+            AIGeneratingText(isGenerating: isGenerating, lineCount: 5) {
+                Text("Aute esse quis sit. Mollit sunt et occaecat anim minim in. Ea amet reprehenderit aliqua exercitation tempor ad amet occaecat nostrud excepteur. Do dolore dolor sint nostrud eiusmod labore tempor sint. Culpa elit aute irure nostrud.")
                     .font(.body)
                     .foregroundStyle(.primary)
             }
@@ -24,10 +24,10 @@ struct TextPlaceholderExample: View {
             }
             .buttonStyle(.glass)
         }
-        .padding()
+        .padding(20)
     }
 }
 
 #Preview {
-    TextPlaceholderExample()
+    GeneratingTextExample()
 }
